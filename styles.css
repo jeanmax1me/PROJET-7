@@ -1,0 +1,161 @@
+/* Box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margins */
+* {
+    margin: 0;
+}
+
+/* Normalize font sizes */
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Remove default paddings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+    padding: 0;
+}
+
+/* Normalize list styles */
+ol,
+ul {
+    list-style: none;
+}
+
+/* Remove default link styles */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Normalize form elements */
+input,
+select,
+textarea,
+button {
+    font: inherit;
+}
+
+/* Normalize images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Remove built-in focus styles */
+button,
+input,
+select,
+textarea {
+    outline: none;
+}
+
+
+body {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.background-img {
+    position: absolute;
+}
+
+.logo-img {
+    position: relative;
+    top: 51px;
+    left: 69px;
+    width: 207px;
+    height: 25.261px;
+}
+
+.main-heading {
+    width: 890px;
+    height: 132px;
+    position: relative;
+    top: 216px;
+    left: 275px;
+    color: #FFD15B;
+    text-align: center;
+    font-family: Anton;
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.research-field {
+    width: 954px;
+    height: 72px;
+    border-radius: 11px;
+    background: #FFF;
+    z-index: 393894283;
+    position: relative;
+    top: 244px;
+    left: 247px;
+}
+
+.search-icon {
+    width: 51px;
+    height: 52px;
+    flex-shrink: 0;
+    background: #1B1B1B;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    transition: background-color 0.3s ease-out;
+}
+
+.search-icon:hover svg circle,
+.search-icon:hover svg line {
+  stroke: black;
+}
+
+.search-icon:hover {
+    background: #FFD15B;
+}
+
+#search-close {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    position: absolute;
+    right: 85px;
+    top: 30px;
+    display: none;
+}
+
+input {
+    margin-top: 24px;
+    margin-left: 35px;
+    color: #7A7A7A;
+    font-family: Manrope;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 303px;
+    height: 22px;
+}
+
+input[type="text"] {
+    flex: 1;
+    border: none;
+    outline: none;
+}
