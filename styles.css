@@ -72,6 +72,7 @@ body {
 
 .container-header {
     position: relative;
+    height: 100%;
 }
 
 .background-img {
@@ -181,18 +182,19 @@ input {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 input[type="text"] {
-    padding-top: 12px;
-    padding-left: 35px;
+    padding-left: clamp(7px, calc(2vw + 6px), 35px);
     border: none;
     outline: none;
 }
 
-@media (max-width: 500px) {
-    input[type="text"] {
-   padding-top: 3px;
-   padding-left: 7px;
-    }
-}
+.invisible-element {
+    position: relative;
+    height: 0; /* You can keep this as 0, as the height will be set dynamically in the script */
+    z-index: -1; /* Send it to the background */
+  }
+  
