@@ -251,14 +251,12 @@ input[type="text"] {
 }
 
 .recipes-card {
-    border: 2px solid peru;
     border-radius: 21px;
     background: #FFF;
     box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
 }
 
 .container-card-text {
-    border: 2px solid green;
     width: 100%;
     padding-left: 6.5%;
     padding-right: 6.5%;
