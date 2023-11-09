@@ -290,11 +290,11 @@ input[type="text"] {
 .recipe-description {
     padding-bottom: 28px;
     color: #1B1B1B;
-font-family: "Manrope", sans-serif;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .recipe-ingredients {
@@ -320,4 +320,21 @@ line-height: normal;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.recipe-time {
+    display: inline-flex;
+    padding: 5px 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 14px;
+    background: #FFD15B;
+    position: absolute;
+    top: 21px;
+    right: 22px;
+}
+
+.recipe-container {
+    position: relative;
 }
