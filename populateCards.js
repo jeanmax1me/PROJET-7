@@ -5,11 +5,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function populateCards() {
     const recipesContainer = document.getElementById('cards-container');
-
     recipes.forEach((recipe, index) => {
         // Create card elements and populate them with recipe data
         const card = createRecipeCard(recipe, index);
-
         // Append the card to the container
         recipesContainer.appendChild(card);
     });
@@ -33,7 +31,7 @@ function createRecipeCard(recipe, index) {
                     ${recipe.ingredients.map((ingredient, i) => `
                         <div class="ingredient${i + 1}">
                             <p class="ingredient-name">${ingredient.ingredient}</p>
-                            <p class="ingredient-quantity">${ingredient.quantity} ${ingredient.unit || ''}</p>
+                            <p class="ingredient-quantity">${ingredient.quantity !== undefined ? ingredient.quantity : ''} ${ingredient.unit !== undefined ? ingredient.unit : ''}</p>
                         </div>
                     `).join('')}
                 </div>
