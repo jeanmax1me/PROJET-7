@@ -66,6 +66,10 @@ textarea {
 
 /* _______________________________________ END OF CSS RESET ____________________________________ */
 
+html {
+    width: 100%;
+}
+
 body {
     max-width: 1440px;
     margin: 0 auto;
@@ -147,7 +151,7 @@ body {
 
 @media (max-width: 666px) {
     .search-icon {
-   right: 0;
+        right: 0;
     }
 }
 
@@ -194,7 +198,7 @@ input[type="text"] {
 }
 
 
-/*_______________________________________ END OF HEADER ______________________________________ */
+/*_______________________________________ DROPDOWN ______________________________________ */
 
 
 .dropdown-container {
@@ -206,6 +210,9 @@ input[type="text"] {
     place-items: center;
 }
 
+
+/* _______________________________________ CARDS _________________________________________ */
+
 .cards-container {
     padding-top: 22px;
     padding-left: clamp(7px, calc(3.5vw + 2px), 102px);
@@ -213,14 +220,21 @@ input[type="text"] {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     row-gap: clamp(7px, calc(4vw + 6px), 66px);
-    column-gap: clamp(7px, calc(3vw + 6px), 48px);   
+    column-gap: clamp(7px, calc(3vw + 6px), 48px);
 }
+
+@media (max-width: 950px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
 
 @media (max-width: 465px) {
     .cards-container {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
-} 
+}
 
 @media (min-width: 1440px) {
     .cards-container {
@@ -229,13 +243,33 @@ input[type="text"] {
     }
 }
 
-.activites-card img {
+.recipes-card img {
     object-fit: cover;
     height: 253px;
     width: 100%;
     border-radius: 20px 20px 0 0;
 }
 
-.activites-card {
+.recipes-card {
     border: 2px solid peru;
+    border-radius: 21px;
+background: #FFF;
+box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+}
+
+.container-card-text {
+    border: 2px solid green;
+    width: 100%;
+    padding-left: 6.5%;
+    padding-right: 6.5%;
+}
+
+.container-card-text h1 {
+    padding-top: 32px;
+}
+
+.recipe-ingredients {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px; 
 }
