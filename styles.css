@@ -64,6 +64,7 @@ textarea {
     outline: none;
 }
 
+/* _______________________________________ END OF CSS RESET ____________________________________ */
 
 body {
     max-width: 1440px;
@@ -192,9 +193,43 @@ input[type="text"] {
     outline: none;
 }
 
-.invisible-element {
-    position: relative;
-    height: 0; /* You can keep this as 0, as the height will be set dynamically in the script */
-    z-index: -1; /* Send it to the background */
-  }
-  
+
+/*_______________________________________ END OF HEADER ______________________________________ */
+
+
+.dropdown-container {
+    width: 100%;
+    height: 108px;
+    background-color: pink;
+    border: 1px solid red;
+    display: grid;
+    place-items: center;
+}
+
+.cards-container {
+    padding-top: 22px;
+    padding-left: clamp(7px, calc(3.5vw + 2px), 102px);
+    padding-right: clamp(7px, calc(3.5vw + 2px), 102px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(26.4%, 380px));
+    row-gap: clamp(7px, calc(4vw + 6px), 66px);
+    column-gap: clamp(7px, calc(3vw + 6px), 48px);   
+}
+
+@media (min-width: 1440px) {
+    .cards-container {
+        padding-left: 102px;
+        padding-right: 102px;
+    }
+}
+
+.activites-card img {
+    object-fit: cover;
+    height: 253px;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+}
+
+.activites-card {
+    border: 2px solid peru;
+}
