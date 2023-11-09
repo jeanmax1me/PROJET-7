@@ -211,10 +211,16 @@ input[type="text"] {
     padding-left: clamp(7px, calc(3.5vw + 2px), 102px);
     padding-right: clamp(7px, calc(3.5vw + 2px), 102px);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(26.4%, 380px));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     row-gap: clamp(7px, calc(4vw + 6px), 66px);
     column-gap: clamp(7px, calc(3vw + 6px), 48px);   
 }
+
+@media (max-width: 465px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+} 
 
 @media (min-width: 1440px) {
     .cards-container {
