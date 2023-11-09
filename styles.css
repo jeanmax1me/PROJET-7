@@ -253,8 +253,8 @@ input[type="text"] {
 .recipes-card {
     border: 2px solid peru;
     border-radius: 21px;
-background: #FFF;
-box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+    background: #FFF;
+    box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
 }
 
 .container-card-text {
@@ -265,11 +265,59 @@ box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
 }
 
 .container-card-text h1 {
-    padding-top: 32px;
+    padding-top: 21px;
+    padding-bottom: 29px;
+    color: #000;
+    font-family: "Anton", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.container-card-text h2 {
+    color: #7A7A7A;
+    font-family: Manrope;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.08px;
+    text-transform: uppercase;
+    padding-bottom: 15px;
+}
+
+.recipe-description {
+    padding-bottom: 28px;
+    color: #1B1B1B;
+font-family: "Manrope", sans-serif;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 
 .recipe-ingredients {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px; 
+    gap: 21px;
+    padding-bottom: 61px;
+}
+
+.ingredient-name {
+    color: #1B1B1B;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.ingredient-quantity {
+    color: #7A7A7A;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
