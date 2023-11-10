@@ -260,7 +260,10 @@ input[type="text"] {
     width: 100%;
     padding-left: 6.5%;
     padding-right: 6.5%;
+    height: 478px;
+    min-height: 478px;
 }
+
 
 .container-card-text h1 {
     padding-top: 21px;
@@ -286,13 +289,27 @@ input[type="text"] {
 }
 
 .recipe-description {
-    padding-bottom: 28px;
     color: #1B1B1B;
     font-family: "Manrope", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    overflow: hidden;
+    max-height: 76px;
+}
+
+.recipe-description:hover {
+    max-height: 100%;
+}
+
+.recipe-description:hover ~ .description-container {
+    max-height: 100%;
+    transition: max-height 0.3s ease; /* Add the same transition effect */
+}
+
+.description-container {
+    margin-bottom: 28px;
 }
 
 .recipe-ingredients {

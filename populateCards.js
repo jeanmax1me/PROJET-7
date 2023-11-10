@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     populateCards();
 });
 
+
 function populateCards() {
     const recipesContainer = document.getElementById('cards-container');
     recipes.forEach((recipe, index) => {
@@ -25,13 +26,15 @@ function createRecipeCard(recipe, index) {
             <div class="container-card-text">
                 <h1>${recipe.name}</h1>
                 <h2>Recette</h2>
+                <div class="description-container">
                 <div class="recipe-description">${recipe.description}</div>
+                </div>
                 <h2>Ingrédients</h2>
                 <div class="recipe-ingredients">
                     ${recipe.ingredients.map((ingredient, i) => `
                         <div class="ingredient${i + 1}">
                             <p class="ingredient-name">${ingredient.ingredient}</p>
-                            <p class="ingredient-quantity">${ingredient.quantity !== undefined ? ingredient.quantity : ''} ${ingredient.unit !== undefined ? ingredient.unit : ''}</p>
+                            <p class="ingredient-quantity">${ingredient.quantity !== undefined ? ingredient.quantity : '-'} ${ingredient.unit !== undefined ? ingredient.unit : ''}</p>
                         </div>
                     `).join('')}
                 </div>
@@ -41,3 +44,18 @@ function createRecipeCard(recipe, index) {
 
     return card;
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const recipeDescriptions = document.querySelectorAll('.recipe-description');
+    const containerCardTexts = document.querySelectorAll('.container-card-text');
+
+    recipeDescriptions.forEach((recipeDescription, index) => {
+        recipeDescription.addEventListener('mouseover', () => {
+            containerCardTexts[index].style.height = `100%`;
+        });
+
+        recipeDescription.addEventListener('mouseout', () => {
+            containerCardTexts[index].style.height = '478px';
+        });
+    });
+});
