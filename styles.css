@@ -350,7 +350,24 @@ body {
 
 .dropdowns {
     display: flex;
-    column-gap: 65px;
+    column-gap: clamp(15px, 4.5vw + 5px, 65px);
+}
+
+@media (max-width: 920px) {
+    .dropdown-container {
+        flex-direction: column;
+        row-gap: 15px;
+        align-items: center;
+        height: 100%;
+    }
+    .dropdowns {
+        flex-direction: column;
+        row-gap: 15px;
+        align-items: center;
+    }
+    .number-container {
+      padding-bottom: 30px;
+    }
 }
 
 
