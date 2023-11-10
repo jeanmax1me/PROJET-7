@@ -5,8 +5,6 @@ const allAppliances = recipes.reduce((appliances, recipe) => {
     return appliances;
 }, []);
 
-console.log(allAppliances);
-
 
 // Get a reference to the container div
 const dd2ListContainer = document.querySelector('.dd2-list');

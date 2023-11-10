@@ -348,6 +348,32 @@ body {
     justify-content: space-between;
 }
 
+#number-recipes {
+    color: #1B1B1B;
+    font-family: Anton;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    height: 32px;
+    padding-top: 17px;
+}
+
+.number-container {
+    padding-right: clamp(7px, calc(3.5vw + 2px), 102px);
+}
+
+@media (min-width: 1440px) {
+    .dropdown-container {
+        padding-left: 102px;
+    }
+
+    .number-container {
+        padding-right: 102px;
+    }
+}
+
+
 .dropdowns {
     display: flex;
     column-gap: clamp(15px, 4.5vw + 5px, 65px);
@@ -360,13 +386,15 @@ body {
         align-items: center;
         height: 100%;
     }
+
     .dropdowns {
         flex-direction: column;
         row-gap: 15px;
         align-items: center;
     }
+
     .number-container {
-      padding-bottom: 30px;
+        padding-bottom: 30px;
     }
 }
 
@@ -416,7 +444,8 @@ body {
 .dd1-visiblepart,
 .dd2-visiblepart,
 .dd3-visiblepart {
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
     padding: 17px 16px;
     align-items: center;
     gap: 63px;
@@ -508,19 +537,4 @@ body {
 .dd2-list p:hover,
 .dd3-list p:hover {
     overflow: visible;
-}
-
-#number-recipes {
-    color: #1B1B1B;
-    font-family: Anton;
-    font-size: 21px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    height: 32px;
-    padding-top: 17px;
-}
-
-.number-container {
-    padding-right: clamp(7px, calc(3.5vw + 2px), 102px);
 }
