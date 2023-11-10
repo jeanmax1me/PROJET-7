@@ -334,7 +334,7 @@ body {
     position: relative;
 }
 
-/*________________________________________ DROPDOWN _____________________________ */
+/*________________________________________ DROPDOWNS _____________________________ */
 
 
 .dropdown-container {
@@ -343,10 +343,20 @@ body {
     background: #EDEDED;
     padding-top: 20px;
     padding-left: clamp(7px, calc(3.5vw + 2px), 102px);
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdowns {
+    display: flex;
+    column-gap: 65px;
 }
 
 
-.dropdown1 {
+.dropdown1,
+.dropdown2,
+.dropdown3 {
     width: 195px;
     flex-shrink: 0;
     border-radius: 11px;
@@ -360,7 +370,9 @@ body {
     transition: height 0.1s linear;
 }
 
-.dropdown1.open {
+.dropdown1.open,
+.dropdown2.open,
+.dropdown3.open {
     height: 315px;
     overflow-y: auto;
     z-index: 10;
@@ -368,7 +380,9 @@ body {
     position: relative;
 }
 
-#dropdownArrow {
+#dropdownArrow1,
+#dropdownArrow2,
+#dropdownArrow3 {
     transition: transform 0.3s ease;
 }
 
@@ -376,11 +390,15 @@ body {
     transform: rotate(180deg);
 }
 
-.dropdown1::-webkit-scrollbar {
+.dropdown1::-webkit-scrollbar,
+.dropdown2::-webkit-scrollbar,
+.dropdown3::-webkit-scrollbar {
     display: none;
 }
 
-.dd1-visiblepart {
+.dd1-visiblepart,
+.dd2-visiblepart,
+.dd3-visiblepart {
     display: inline-flex;
     padding: 17px 16px;
     align-items: center;
@@ -389,7 +407,9 @@ body {
     background: #FFF;
 }
 
-.dd1-visiblepart h1 {
+.dd1-visiblepart h1,
+.dd2-visiblepart h1,
+.dd3-visiblepart h1 {
     color: #1B1B1B;
     font-family: "Manrope", sans-serif;
     font-size: 16px;
@@ -405,7 +425,9 @@ body {
     transform: translateX(15px);
 }
 
-.dd1-inputcontainer {
+.dd1-inputcontainer,
+.dd2-inputcontainer,
+.dd3-inputcontainer {
     position: relative;
     width: 163px;
     height: 36px;
@@ -416,7 +438,9 @@ body {
     background: #FFF;
 }
 
-.dd1-inputcontainer input[type="text"] {
+.dd1-inputcontainer input[type="text"],
+.dd2-inputcontainer input[type="text"],
+.dd3-inputcontainer input[type="text"] {
     border: none;
     outline: none;
     width: 120px;
@@ -431,7 +455,9 @@ body {
     background: #FFF;
 }
 
-.dd1-list {
+.dd1-list,
+.dd2-list,
+.dd3-list {
     display: flex;
     width: 163px;
     flex-direction: column;
@@ -450,7 +476,9 @@ body {
     position: relative;
 }
 
-.dd1-list p {
+.dd1-list p,
+.dd2-list p,
+.dd3-list p {
     height: 19px;
     white-space: nowrap;
     overflow: hidden;
@@ -459,6 +487,23 @@ body {
     background: #FFF;
 }
 
-.dd1-list p:hover {
+.dd1-list p:hover,
+.dd2-list p:hover,
+.dd3-list p:hover {
     overflow: visible;
+}
+
+#number-recipes {
+    color: #1B1B1B;
+    font-family: Anton;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    height: 32px;
+    padding-top: 17px;
+}
+
+.number-container {
+    padding-right: clamp(7px, calc(3.5vw + 2px), 102px);
 }
