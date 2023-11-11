@@ -530,10 +530,33 @@ body {
     z-index: 10;
     width: 195px;
     padding-left: 16px;
+    cursor: pointer;
+    position: relative;
 }
 
 .dd1-list p:hover,
 .dd2-list p:hover,
 .dd3-list p:hover {
     overflow: visible;
+}
+
+.dd1-list p::before,
+.dd2-list p::before,
+.dd3-list p::before {
+    content: ""; 
+    position: absolute;
+    top: -10px; 
+    bottom: -10px; 
+    left: 0;
+    right: 0;
+    background: #FFD15B;
+    z-index: -1; 
+    opacity: 0; 
+    transition: opacity 0.1s linear; 
+}
+
+.dd1-list p:hover::before,
+.dd2-list p:hover::before,
+.dd3-list p:hover::before {
+    opacity: 1; /* Make the pseudo-element visible on hover */
 }
