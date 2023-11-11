@@ -509,8 +509,6 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: left;
-    padding-left: 16px;
-    row-gap: 13px;
     color: #1B1B1B;
     font-family: "Manrope", sans-serif;
     font-size: 14px;
@@ -519,7 +517,7 @@ body {
     line-height: normal;
     z-index: 10;
     background: #FFF;
-    position: relative;
+    row-gap: 13px;
 }
 
 .dd1-list p,
@@ -530,7 +528,8 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     z-index: 10;
-    background: #FFF;
+    width: 195px;
+    padding-left: 16px;
 }
 
 .dd1-list p:hover,

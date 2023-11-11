@@ -1,6 +1,7 @@
 // populateCards.js
 document.addEventListener('DOMContentLoaded', function () {
     populateCards();
+    updateRecipeCount(); 
 });
 
 
@@ -59,3 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+function updateRecipeCount() {
+    const recipeCountElement = document.getElementById('number-recipes');
+    const visibleRecipeCards = document.querySelectorAll('.recipe-container');
+    const numberOfRecipes = visibleRecipeCards.length;
+
+    recipeCountElement.textContent = `${numberOfRecipes} recettes`;
+}
