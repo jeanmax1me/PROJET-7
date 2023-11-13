@@ -19,7 +19,10 @@ allUstensils.forEach(ustensil => {
 
   // Set the text content of the <p> to the ingredient name
   pElement.textContent = ustensil;
-
+  // Assign the selectItem function to the onclick property
+  pElement.onclick = function () {
+    selectItem(this);
+  };
   // Append the <p> to the container div
   dd3ListContainer.appendChild(pElement);
 });

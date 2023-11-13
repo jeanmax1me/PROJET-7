@@ -413,6 +413,7 @@ body {
     height: 56px;
     overflow-y: hidden;
     transition: height 0.1s linear;
+    position: relative;
 }
 
 .dropdown1.open,
@@ -451,6 +452,9 @@ body {
     gap: 63px;
     border-radius: 11px;
     background: #FFF;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .dd1-visiblepart h1,
@@ -534,15 +538,15 @@ body {
     position: relative;
 }
 
-.dd1-list p:hover,
-.dd2-list p:hover,
-.dd3-list p:hover {
+.dd1-list p:not(.selected):hover,
+.dd2-list p:not(.selected):hover,
+.dd3-list p:not(.selected):hover {
     overflow: visible;
 }
 
-.dd1-list p::before,
-.dd2-list p::before,
-.dd3-list p::before {
+.dd1-list p:not(.selected)::before,
+.dd2-list p:not(.selected)::before,
+.dd3-list p:not(.selected)::before {
     content: ""; 
     position: absolute;
     top: -10px; 
@@ -555,8 +559,50 @@ body {
     transition: opacity 0.1s linear; 
 }
 
-.dd1-list p:hover::before,
-.dd2-list p:hover::before,
-.dd3-list p:hover::before {
+.dd1-list p:not(.selected):hover::before,
+.dd2-list p:not(.selected):hover::before,
+.dd3-list p:not(.selected):hover::before {
     opacity: 1; /* Make the pseudo-element visible on hover */
 }
+
+
+.filters-selected {
+    padding-left: clamp(7px, calc(3.5vw + 2px), 102px);
+    width: 100%;
+    background: #EDEDED;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; 
+}
+
+.selected-item {
+    display: inline-flex;
+    padding: 17px 18px;
+    align-items: center;
+    gap: 60px;
+    border-radius: 10px;
+    background: #FFD15B;
+    color: #000;
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.selected {
+    color: #1B1B1B;
+font-family: Manrope;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+flex-shrink: 0;
+background: #FFD15B;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding-right: 9px;
+}
+
+
