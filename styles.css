@@ -588,6 +588,7 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    height: 53px;
 }
 
 .selected {
@@ -602,7 +603,6 @@ background: #FFD15B;
 display: flex;
 align-items: center;
 justify-content: space-between;
-padding-right: 9px;
+padding-right: 10px;
 }
-
 
