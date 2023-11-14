@@ -24,3 +24,4 @@ visiblePart3.addEventListener('click', function () {
     dropdownArrow3.classList.toggle('rotate180');
     dropdown3.classList.toggle('open');
 });
+

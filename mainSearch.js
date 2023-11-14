@@ -1,3 +1,5 @@
+
+
 searchInput.addEventListener('input', function () {
     handleSearch();
 });
@@ -8,35 +10,60 @@ function handleSearch() {
     // Check if the user has entered at least 3 characters
     if (userInput.length >= 3) {
         // Filter recipes based on title, ingredients, and description
-        const searchResults = recipes.filter(recipe => {
+        results = recipes.filter(recipe => {
             const titleMatch = recipe.name.toLowerCase().includes(userInput);
             const ingredientsMatch = recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(userInput));
             const descriptionMatch = recipe.description.toLowerCase().includes(userInput);
             // Return true if there is a match in title, ingredients, or description
             return titleMatch || ingredientsMatch || descriptionMatch;
         });
-
-        updateSearchResults(searchResults);
-        populateCards(searchResults);
+        updateSearchResults(results);  
+        populateCards(results);
     } else {
         // If less than 3 characters, clear previous results
-        clearPreviousResults();
+        resetRecipes();
     }
 }
 
 function updateSearchResults(results) {
-    console.log('Updating Search Results:', results);
-    clearPreviousResults();
-    renderSearchResults(results);
+    updateDropdownOptions(1, getUniqueIngredients(results), 'ingredient');
+    updateDropdownOptions(2, getUniqueAppliances(results), 'appliance');
+    updateDropdownOptions(3, getUniqueUstensils(results), 'ustensil');
 }
 
-function clearPreviousResults() {
-    console.log('Clearing Previous Results');
+function resetRecipes() {
     // Implement logic to clear previous search results from the UI
+    populateCards(recipes);
+    updateRecipeCount(); 
 }
 
-function renderSearchResults(results) {
-    console.log('Rendering Search Results:', results);
-    // Implement logic to render the updated search results on the UI
-    // For example, create and display new recipe cards based on the filtered results
+function updateDropdownOptions(dropdownNumber, options, property) {
+    const dropdownId = `dd${dropdownNumber}-list`;
+    const dropdown = document.getElementById(dropdownId);
+
+    if (!dropdown) {
+        console.error(`Dropdown with ID ${dropdownId} not found.`);
+        return;
+    }
+
+    dropdown.innerHTML = '';
+
+    options.forEach(option => {
+        const optionElement = document.createElement('p');
+        
+        if (typeof option === 'string') {
+            optionElement.textContent = option;
+        } else if (typeof option === 'object' && property in option) {
+            optionElement.textContent = option[property];
+        } else {
+            console.error(`Invalid option format: ${option}`);
+            return;
+        }
+
+        optionElement.onclick = function () {
+            selectItem(this);
+        };
+
+        dropdown.appendChild(optionElement);
+    });
 }
