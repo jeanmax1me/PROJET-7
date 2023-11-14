@@ -1,18 +1,26 @@
 // populateCards.js
 document.addEventListener('DOMContentLoaded', function () {
-    populateCards();
+    populateCards(recipes);
     updateRecipeCount(); 
 });
 
-
-function populateCards() {
+function populateCards(results) {
     const recipesContainer = document.getElementById('cards-container');
-    recipes.forEach((recipe, index) => {
-        // Create card elements and populate them with recipe data
-        const card = createRecipeCard(recipe, index);
-        // Append the card to the container
-        recipesContainer.appendChild(card);
-    });
+    recipesContainer.innerHTML = ''; // Clear existing cards
+    if (results.length === 0) {
+        // If no results, display a message
+        const message = document.createElement('p');
+        message.textContent = `Oups ! Aucune recette ne correspond à votre recherche "${searchInput.value}"`;
+        recipesContainer.appendChild(message);
+        updateRecipeCount();
+    } else {
+        // If there are results, populate cards
+        results.forEach((recipe, index) => {
+            const card = createRecipeCard(recipe, index);
+            recipesContainer.appendChild(card);
+        });
+        updateRecipeCount();
+    }
 }
 
 function createRecipeCard(recipe, index) {
@@ -66,5 +74,15 @@ function updateRecipeCount() {
     const visibleRecipeCards = document.querySelectorAll('.recipe-container');
     const numberOfRecipes = visibleRecipeCards.length;
 
-    recipeCountElement.textContent = `${numberOfRecipes} recettes`;
+    // Use a conditional statement to handle pluralization and zero case
+    let recipeText;
+
+    if (numberOfRecipes === 0) {
+        recipeText = 'Aucune recette';
+    } else {
+        recipeText = numberOfRecipes === 1 ? 'recette' : 'recettes';
+    }
+
+    // Display only the text without the number if numberOfRecipes is 0
+    recipeCountElement.textContent = numberOfRecipes === 0 ? recipeText : `${numberOfRecipes} ${recipeText}`;
 }
