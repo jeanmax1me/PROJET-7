@@ -1,17 +1,12 @@
 function selectItem(selectedElement) {
     const filterValue = selectedElement.textContent;
-    console.log(`Selected filter value: ${filterValue}`);
 
     if (!selectedFilters.includes(filterValue)) {
         // If the filter is not present, add it and update the search
         selectedFilters.push(filterValue);
-        console.log(`Selected filters array: ${selectedFilters}`);
         searchByFilters(selectedFilters);
     } else {
-        // If the filter is already present, remove it
-        const originalOnClick = selectedElement.onclick;
         const selectedItemClone = document.querySelector(`.selected-item[data-filter="${filterValue}"]`);
-
         if (selectedItemClone) {
             removeSelectedItem(selectedElement, selectedItemClone, originalOnClick);
         }

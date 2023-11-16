@@ -28,14 +28,18 @@ function handleSearch() {
 }
 
 function searchByFilters(selectedFilters) {
-
     results = recipes.filter(recipe => {
         const ingredientMatch = selectedFilters.every(filter => {
             return recipe.ingredients.some(ingredient => {
                 const lowerCaseIngredient = ingredient.ingredient.toLowerCase();
-                return lowerCaseIngredient.includes(filter);
+                const lowerCaseFilter = filter.toLowerCase();
+                const includesFilter = lowerCaseIngredient.includes(lowerCaseFilter);
+                console.log(`Ingredient: ${lowerCaseIngredient}, Filter: ${lowerCaseFilter}, Match: ${includesFilter}`);
+                return includesFilter;
             });
         });
+        
+
         const applianceMatch = selectedFilters.some(filter =>
             recipe.appliance.toLowerCase().includes(filter.toLowerCase())
         );
@@ -45,14 +49,23 @@ function searchByFilters(selectedFilters) {
                 ustensil.toLowerCase().includes(filter.toLowerCase())
             )
         );
-        
+
+        console.log("Recipe ID:", recipe.id);
+        console.log("Appliance:", recipe.appliance);
+        console.log("Ustensils:", recipe.ustensils);
+        console.log("Ingredient Match:", ingredientMatch);
+        console.log("Appliance Match:", applianceMatch);
+        console.log("Ustensil Match:", ustensilMatch);
+
         return ingredientMatch || applianceMatch || ustensilMatch;
     });
+
     console.log("Results before updateSearchResults:", results);
     updateSearchResults(results);
     console.log("Results after updateSearchResults:", results);
     populateCards(results);
 }
+
 
 
 function updateSearchResults(results) {
