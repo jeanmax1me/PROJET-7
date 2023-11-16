@@ -1,24 +1,33 @@
 
-
 function selectItem(selectedElement) {
     if (!selectedElement.classList.contains("selected")) {
-        var svgDropdown = selectedElement.querySelector('svg');
-        if (!svgDropdown) {
-            const originalOnClick = selectedElement.onclick;  //save initial onclick
-            var selectedItemClone = selectedElement.cloneNode(true);
-            selectedItemClone.classList.add("selected-item");
-            selectedElement.classList.add("selected");
-            selectedElement.style.height = "37px";
-            selectedElement.onclick = null;   //reset onclick
-            selectedElement.addEventListener('click', function () {
-                removeSelectedItem(selectedElement, selectedItemClone, originalOnClick);
-            });
-            selectedItemClone.addEventListener('click', function () {
-                removeSelectedItem(selectedElement, selectedItemClone, originalOnClick);    
-            });
-            createDropdownSVG();
-            createCloneSVG();
-        }
+        // Push the selected filter value to the array
+        const filterValue = selectedElement.textContent;
+
+        selectedFilters.push(filterValue);
+        searchInput.value = filterValue.toLowerCase();
+          // Trigger a new search by filter
+          searchByFilter(filterValue.toLowerCase());
+    }
+}
+
+function updateSelectedItemLayout(selectedElement) {
+    var svgDropdown = selectedElement.querySelector('svg');
+    if (!svgDropdown) {
+        const originalOnClick = selectedElement.onclick;  //save initial onclick
+        var selectedItemClone = selectedElement.cloneNode(true);
+        selectedItemClone.classList.add("selected-item");
+        selectedElement.classList.add("selected");
+        selectedElement.style.height = "37px";
+        selectedElement.onclick = null;   //reset onclick
+        selectedElement.addEventListener('click', function () {
+            removeSelectedItem(selectedElement, selectedItemClone, originalOnClick);
+        });
+        selectedItemClone.addEventListener('click', function () {
+            removeSelectedItem(selectedElement, selectedItemClone, originalOnClick);
+        });
+        createDropdownSVG();
+        createCloneSVG();
     }
 
 
@@ -64,22 +73,41 @@ function selectItem(selectedElement) {
     }
 }
 function removeSelectedItem(selectedElement, selectedItemClone, originalOnClick) {
+    const filterValue = selectedElement.textContent;
+    // Remove the filter value from the array
+    const index = selectedFilters.indexOf(filterValue);
+    if (index !== -1) {
+        selectedFilters.splice(index, 1);
+    }
+       // If there are no selected filters, clear the userInput
+       if (selectedFilters.length === 0) {
+        searchInput.value = '';
+        resetPageState(); // Add a function to reset dropdowns and cards to their original state
+    }
+    // Trigger a new search
+    handleSearch();
     selectedElement.classList.remove("selected");
     selectedElement.style.height = "";
-    var svgDropdown = selectedElement.querySelector('svg');
-    if (svgDropdown) {
-        svgDropdown.remove();
-    }
+    
     if (document.body.contains(selectedItemClone)) {
         setTimeout(function () {    //timeout to not go too fast for the DOM to update 
-            var svgClone = selectedItemClone.querySelector('svg');
-            if (svgClone) {
-                svgClone.remove();
-            }
+            selectedItemClone.querySelector('svg')?.remove();
             selectedItemClone.parentNode.removeChild(selectedItemClone);
         }, 0);
     } else {
         // The clone has already been removed, so reset the onclick handler
         selectedElement.onclick = originalOnClick;
     }
+}
+
+function resetPageState() {
+    // Add logic here to reset dropdowns and cards to their original state
+    // For example, updateDropdownOptions to set the options to their original state
+    // and populateCards to display the original set of cards
+    // You might need to adapt this based on your specific implementation
+    updateDropdownOptions(1, allIngredients, 'ingredient');
+    updateDropdownOptions(2, allAppliances, 'appliance');
+    updateDropdownOptions(3, allUstensils, 'ustensil');
+    populateCards(recipes); // Assuming recipes is the original set of cards
+    updateRecipeCount();
 }

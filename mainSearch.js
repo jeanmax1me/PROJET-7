@@ -14,10 +14,11 @@ function handleSearch() {
             const titleMatch = recipe.name.toLowerCase().includes(userInput);
             const ingredientsMatch = recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(userInput));
             const descriptionMatch = recipe.description.toLowerCase().includes(userInput);
-            // Return true if there is a match in title, ingredients, or description
+            // Check for matches based on selected filters
             return titleMatch || ingredientsMatch || descriptionMatch;
         });
-        updateSearchResults(results);  
+        // Log the filtered results
+        updateSearchResults(results);
         populateCards(results);
     } else {
         // If less than 3 characters, clear previous results
@@ -25,16 +26,66 @@ function handleSearch() {
     }
 }
 
-function updateSearchResults(results) {
-    updateDropdownOptions(1, getUniqueIngredients(results), 'ingredient');
-    updateDropdownOptions(2, getUniqueAppliances(results), 'appliance');
-    updateDropdownOptions(3, getUniqueUstensils(results), 'ustensil');
+function searchByFilter(filter) {
+    const filterLowerCase = filter.toLowerCase();
+
+    // Filter recipes based on the selected filter
+    results = recipes.filter(recipe => {
+        const ingredientMatch = recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filterLowerCase);
+        const applianceMatch = recipe.appliance.toLowerCase() === filterLowerCase;
+        const ustensilMatch = recipe.ustensils.some(ustensil => ustensil.toLowerCase() === filterLowerCase);
+
+        return ingredientMatch || applianceMatch || ustensilMatch;
+    });
+
+    updateSearchResults(results);
+    populateCards(results);
 }
+
+function updateSearchResults(results) {
+    const uniqueIngredients = getUniqueIngredients(results);
+    const uniqueAppliances = getUniqueAppliances(results);
+    const uniqueUstensils = getUniqueUstensils(results);
+
+    updateDropdownOptions(1, uniqueIngredients, 'ingredient');
+    updateDropdownOptions(2, uniqueAppliances, 'appliance');
+    updateDropdownOptions(3, uniqueUstensils, 'ustensil');
+    // Usage in updateSearchResults function
+    const containers = [dd1ListContainer, dd2ListContainer, dd3ListContainer];
+
+    selectedFilters.forEach(filter => {
+        const isInIngredients = uniqueIngredients.includes(filter);
+        const isInAppliances = uniqueAppliances.includes(filter);
+        const isInUstensils = uniqueUstensils.includes(filter);
+
+        if (isInIngredients || isInAppliances || isInUstensils) {
+            const dropdownElement = findDropdownElementByText(filter, containers);
+            if (dropdownElement) {
+                updateSelectedItemLayout(dropdownElement);
+            }
+        }
+    });
+}
+
+function findDropdownElementByText(text, containers) {
+    for (const container of containers) {
+        const allDropdownElements = container.querySelectorAll('p');
+
+        for (const element of allDropdownElements) {
+            if (element.textContent.trim().toLowerCase() === text.trim().toLowerCase()) {
+                return element;
+            }
+        }
+    }
+    return null;
+}
+
+
 
 function resetRecipes() {
     // Implement logic to clear previous search results from the UI
     populateCards(recipes);
-    updateRecipeCount(); 
+    updateRecipeCount();
 }
 
 function updateDropdownOptions(dropdownNumber, options, property) {
@@ -50,7 +101,7 @@ function updateDropdownOptions(dropdownNumber, options, property) {
 
     options.forEach(option => {
         const optionElement = document.createElement('p');
-        
+
         if (typeof option === 'string') {
             optionElement.textContent = option;
         } else if (typeof option === 'object' && property in option) {
@@ -59,11 +110,12 @@ function updateDropdownOptions(dropdownNumber, options, property) {
             console.error(`Invalid option format: ${option}`);
             return;
         }
-
         optionElement.onclick = function () {
             selectItem(this);
         };
-
         dropdown.appendChild(optionElement);
     });
 }
+
+
+

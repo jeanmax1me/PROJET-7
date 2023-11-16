@@ -11,17 +11,19 @@ const allIngredients = recipes.reduce((ingredients, recipe) => {
 }, []);
 
 function getUniqueIngredients(results) {
-  const uniqueIngredients = results.reduce((ingredients, recipe) => {
+    const uniqueIngredients = results.reduce((ingredients, recipe) => {
       recipe.ingredients.forEach(ingredient => {
-          // Check if the ingredient is not already in the array
-          if (!ingredients.some(i => i.ingredient === ingredient.ingredient)) {
-              ingredients.push(ingredient);
-          }
+        // Check if the ingredient is not already in the array
+        const existingIngredient = ingredients.find(i => i.toLowerCase() === ingredient.ingredient.toLowerCase());
+        if (!existingIngredient) {
+          ingredients.push(ingredient.ingredient);
+        }
       });
       return ingredients;
-  }, []);
-  return uniqueIngredients;
-}
+    }, []);
+    return uniqueIngredients;
+  }
+  
 
 // Get a reference to the container div
 const dd1ListContainer = document.querySelector('.dd1-list');
