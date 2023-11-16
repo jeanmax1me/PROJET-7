@@ -1,25 +1,29 @@
 function selectItem(selectedElement) {
-    const filterValue = selectedElement.textContent;
-
-    if (!selectedFilters.includes(filterValue)) {
+    const filterValue = selectedElement.textContent.toLowerCase(); // Convert to lowercase
+    // Check if the filter is not present in selectedFilters (case-insensitive)
+    if (!selectedFilters.some(filter => filter.toLowerCase() === filterValue)) {
         // If the filter is not present, add it and update the search
         selectedFilters.push(filterValue);
+        console.log("pushed filter value:", filterValue)
         searchByFilters(selectedFilters);
     } else {
         const selectedItemClone = document.querySelector(`.selected-item[data-filter="${filterValue}"]`);
         if (selectedItemClone) {
-            removeSelectedItem(selectedElement, selectedItemClone, originalOnClick);
+            removeSelectedItem(selectedElement, selectedItemClone);
         }
+        updateSelectedVisuals();
+        console.log("selected filters end of selectItem fn:", selectedFilters);
     }
 }
 
-
 function updateSelectedItemLayout(selectedElement) {
-    const filterValue = selectedElement.textContent.trim();
+    const filterValue = selectedElement.textContent.trim().toLowerCase();
     const svgDropdown = selectedElement.querySelector('svg');
 
-    if (!svgDropdown) {
-        const originalOnClick = selectedElement.onclick;
+    if (!selectedElement.classList.contains("selected")) {
+        selectedElement.classList.add("selected");
+        selectedElement.style.height = "37px";
+        selectedElement.setAttribute('data-filter', filterValue);
         const existingClone = document.querySelector(`.selected-item[data-filter="${filterValue}"]`);
 
         if (!existingClone) {
@@ -27,23 +31,18 @@ function updateSelectedItemLayout(selectedElement) {
             selectedItemClone.textContent = filterValue;
             selectedItemClone.classList.add("selected-item");
             selectedItemClone.setAttribute('data-filter', filterValue);
-            selectedElement.classList.add("selected");
-            selectedElement.style.height = "37px";
-            selectedElement.onclick = null;
-            selectedItemClone.onclick = null;
-            selectedElement.addEventListener('click', function () {
-                removeSelectedItem(selectedElement, selectedItemClone, originalOnClick);
-            });
-            selectedItemClone.addEventListener('click', function () {
-                removeSelectedItem(selectedElement, selectedItemClone, originalOnClick);
-            });
+            selectedItemClone.onclick = function () {
+                selectItem(this);
+            };
             selectedContainer.appendChild(selectedItemClone);
-            createDropdownSVG();
-            createCloneSVG();
         }
     }
-
-
+    if (!svgDropdown) {
+        createDropdownSVG();
+    }
+    if (!selectedItemClone.querySelector('svg')) {
+        createCloneSVG();
+    }
 
     // ------------------SVG IN THE DROPDOWN------------------------   
     function createDropdownSVG() {
@@ -84,12 +83,11 @@ function updateSelectedItemLayout(selectedElement) {
         pathElement.setAttribute("stroke-linejoin", "round");
         svgElement.appendChild(pathElement);
         selectedItemClone.appendChild(svgElement);
-
     }
 }
 
-function removeSelectedItem(selectedElement, selectedItemClone, originalOnClick) {
-    const filterValue = selectedElement.textContent;
+function removeSelectedItem(selectedElement, selectedItemClone) {
+    const filterValue = selectedElement.textContent.trim().toLowerCase();
     // Remove the filter value from the array
     const index = selectedFilters.indexOf(filterValue);
     if (index !== -1) {
@@ -104,14 +102,13 @@ function removeSelectedItem(selectedElement, selectedItemClone, originalOnClick)
     selectedElement.querySelector('svg')?.remove();
 
     if (document.body.contains(selectedItemClone)) {
-        setTimeout(function () {    //timeout to wait for the DOM to update 
+        setTimeout(function () {    // timeout to wait for the DOM to update 
             selectedItemClone.querySelector('svg')?.remove();
             selectedItemClone.remove();
         }, 0);
-    } else {
-        selectedElement.onclick = originalOnClick;
     }
 }
+
 
 function resetPageState() {
     updateDropdownOptions(1, allIngredients, 'ingredient');
@@ -120,3 +117,25 @@ function resetPageState() {
     populateCards(recipes);
     updateRecipeCount();
 }
+
+
+function updateSelectedVisuals() {
+    const containers = [dd1ListContainer, dd2ListContainer, dd3ListContainer, selectedContainer];
+
+    containers.forEach(container => {
+        const allSelectedItems = container.querySelectorAll('[class*="selected"]');
+
+        allSelectedItems.forEach(selectedItem => {
+            const filterValue = selectedItem.getAttribute('data-filter');
+            const selectedItemText = selectedItem.textContent.trim().toLowerCase();
+
+            console.log('Filter Value:', filterValue);
+            console.log('Selected Item Text:', selectedItemText);
+
+            if (!selectedFilters.includes(filterValue) && !selectedFilters.includes(selectedItemText)) {
+                removeSelectedItem(selectedItem, null, null);
+            }
+        });
+    });
+}
+

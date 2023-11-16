@@ -20,15 +20,6 @@ function getUniqueIngredients(results) {
         });
         return ingredients;
     }, []);
-
-    console.log("Unique Ingredients:", uniqueIngredients);
-    console.log("Selected Filters:", selectedFilters);
-
-    // Log recipe ingredients
-    results.forEach(recipe => {
-        console.log("Recipe Ingredients:", recipe.ingredients.map(ingredient => ingredient.ingredient));
-    });
-
     return uniqueIngredients;
 }
 

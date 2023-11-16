@@ -34,42 +34,28 @@ function searchByFilters(selectedFilters) {
                 const lowerCaseIngredient = ingredient.ingredient.toLowerCase();
                 const lowerCaseFilter = filter.toLowerCase();
                 const includesFilter = lowerCaseIngredient.includes(lowerCaseFilter);
-                console.log(`Ingredient: ${lowerCaseIngredient}, Filter: ${lowerCaseFilter}, Match: ${includesFilter}`);
                 return includesFilter;
             });
         });
-        
-
         const applianceMatch = selectedFilters.some(filter =>
             recipe.appliance.toLowerCase().includes(filter.toLowerCase())
         );
-
         const ustensilMatch = recipe.ustensils.some(ustensil =>
             selectedFilters.some(filter =>
                 ustensil.toLowerCase().includes(filter.toLowerCase())
             )
         );
-
-        console.log("Recipe ID:", recipe.id);
-        console.log("Appliance:", recipe.appliance);
-        console.log("Ustensils:", recipe.ustensils);
-        console.log("Ingredient Match:", ingredientMatch);
-        console.log("Appliance Match:", applianceMatch);
-        console.log("Ustensil Match:", ustensilMatch);
-
         return ingredientMatch || applianceMatch || ustensilMatch;
     });
-
-    console.log("Results before updateSearchResults:", results);
     updateSearchResults(results);
-    console.log("Results after updateSearchResults:", results);
     populateCards(results);
+    updateSelectedVisuals();
+    console.log("Hello visuals");
 }
 
 
 
 function updateSearchResults(results) {
-    console.log("Results in updateSearchResults:", results);
     const uniqueIngredients = getUniqueIngredients(results);
     const uniqueAppliances = getUniqueAppliances(results);
     const uniqueUstensils = getUniqueUstensils(results);
@@ -87,7 +73,6 @@ function updateSearchResults(results) {
         if (isInIngredients || isInAppliances || isInUstensils) {
             const dropdownElement = findDropdownElementByText(filter, containers);
             if (dropdownElement) {
-                console.log("sending to update layout")
                 updateSelectedItemLayout(dropdownElement);
             }
         }
