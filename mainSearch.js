@@ -9,6 +9,7 @@ function handleSearch() {
 
     // Check if the user has entered at least 3 characters
     if (userInput.length >= 3) {
+        selectedFilters = [];
         // Filter recipes based on title, ingredients, and description
         results = recipes.filter(recipe => {
             const titleMatch = recipe.name.toLowerCase().includes(userInput);
@@ -26,23 +27,36 @@ function handleSearch() {
     }
 }
 
-function searchByFilter(filter) {
-    const filterLowerCase = filter.toLowerCase();
+function searchByFilters(selectedFilters) {
 
-    // Filter recipes based on the selected filter
     results = recipes.filter(recipe => {
-        const ingredientMatch = recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase() === filterLowerCase);
-        const applianceMatch = recipe.appliance.toLowerCase() === filterLowerCase;
-        const ustensilMatch = recipe.ustensils.some(ustensil => ustensil.toLowerCase() === filterLowerCase);
+        const ingredientMatch = selectedFilters.every(filter => {
+            return recipe.ingredients.some(ingredient => {
+                const lowerCaseIngredient = ingredient.ingredient.toLowerCase();
+                return lowerCaseIngredient.includes(filter);
+            });
+        });
+        const applianceMatch = selectedFilters.some(filter =>
+            recipe.appliance.toLowerCase().includes(filter.toLowerCase())
+        );
 
+        const ustensilMatch = recipe.ustensils.some(ustensil =>
+            selectedFilters.some(filter =>
+                ustensil.toLowerCase().includes(filter.toLowerCase())
+            )
+        );
+        
         return ingredientMatch || applianceMatch || ustensilMatch;
     });
-
+    console.log("Results before updateSearchResults:", results);
     updateSearchResults(results);
+    console.log("Results after updateSearchResults:", results);
     populateCards(results);
 }
 
+
 function updateSearchResults(results) {
+    console.log("Results in updateSearchResults:", results);
     const uniqueIngredients = getUniqueIngredients(results);
     const uniqueAppliances = getUniqueAppliances(results);
     const uniqueUstensils = getUniqueUstensils(results);
@@ -57,10 +71,10 @@ function updateSearchResults(results) {
         const isInIngredients = uniqueIngredients.includes(filter);
         const isInAppliances = uniqueAppliances.includes(filter);
         const isInUstensils = uniqueUstensils.includes(filter);
-
         if (isInIngredients || isInAppliances || isInUstensils) {
             const dropdownElement = findDropdownElementByText(filter, containers);
             if (dropdownElement) {
+                console.log("sending to update layout")
                 updateSelectedItemLayout(dropdownElement);
             }
         }
