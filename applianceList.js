@@ -1,8 +1,7 @@
-
 // Collect all appliances from all recipes
 const allAppliances = recipes.reduce((appliances, recipe) => {
-  if (!appliances.includes(recipe.appliance)) {
-      appliances.push(recipe.appliance);
+  if (!appliances.includes(recipe.appliance.toLowerCase())) {
+      appliances.push(recipe.appliance.toLowerCase());
   }
   return appliances;
 }, []);
@@ -10,8 +9,8 @@ const allAppliances = recipes.reduce((appliances, recipe) => {
 // Get unique appliances based on the filtered recipes
 function getUniqueAppliances(results) {
   const uniqueAppliances = results.reduce((appliances, recipe) => {
-    if (!appliances.includes(recipe.appliance)) {
-      appliances.push(recipe.appliance);
+    if (!appliances.includes(recipe.appliance.toLowerCase())) {
+      appliances.push(recipe.appliance.toLowerCase());
     }
     return appliances;
   }, []);

@@ -11,13 +11,14 @@ function selectItem(selectedElement) {
         if (selectedItemClone) {
             removeSelectedItem(selectedElement, selectedItemClone);
         }
-        updateSelectedVisuals();
-        console.log("selected filters end of selectItem fn:", selectedFilters);
     }
+    updateSelectedVisuals();
+    console.log("END OF SELECTITEM FUNCTION >selected filters :", selectedFilters);
 }
 
 function updateSelectedItemLayout(selectedElement) {
     const filterValue = selectedElement.textContent.trim().toLowerCase();
+    console.log('Filter Value:', filterValue);
     const svgDropdown = selectedElement.querySelector('svg');
 
     if (!selectedElement.classList.contains("selected")) {

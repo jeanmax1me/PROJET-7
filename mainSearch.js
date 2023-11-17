@@ -92,8 +92,6 @@ function findDropdownElementByText(text, containers) {
     return null;
 }
 
-
-
 function resetRecipes() {
     // Implement logic to clear previous search results from the UI
     populateCards(recipes);
@@ -115,9 +113,9 @@ function updateDropdownOptions(dropdownNumber, options, property) {
         const optionElement = document.createElement('p');
 
         if (typeof option === 'string') {
-            optionElement.textContent = option;
+            optionElement.textContent = option.toLowerCase(); // Convert to lowercase
         } else if (typeof option === 'object' && property in option) {
-            optionElement.textContent = option[property];
+            optionElement.textContent = option[property].toLowerCase(); // Convert to lowercase
         } else {
             console.error(`Invalid option format: ${option}`);
             return;
@@ -128,6 +126,5 @@ function updateDropdownOptions(dropdownNumber, options, property) {
         dropdown.appendChild(optionElement);
     });
 }
-
 
 
