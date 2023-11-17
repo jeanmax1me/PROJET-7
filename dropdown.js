@@ -33,14 +33,11 @@ dd1Input.addEventListener('input', function () {
     const inputValue = dd1Input.value.toLowerCase();
     const dd1ListContainer = document.getElementById('dd1-list');
     const dd1Options = dd1ListContainer.querySelectorAll('p');
+    const dd1Selected = dd1ListContainer.querySelectorAll('p.selected'); 
     dd1Options.forEach(option => {
         const optionText = option.textContent.toLowerCase();
         const isMatch = optionText.includes(inputValue);
-        option.style.display = isMatch ? 'block' : 'none';
-          // Reapply the .selected class if the option is selected
-          if (option.classList.contains('selected')) {
-            option.classList.add('selected');
-        }
+       option.style.display = isMatch ? 'flex' : 'none';
     });
 });
 
@@ -55,7 +52,7 @@ dd2Input.addEventListener('input', function () {
     dd2Options.forEach(option => {
         const optionText = option.textContent.toLowerCase();
         const isMatch = optionText.includes(inputValue);
-        option.style.display = isMatch ? 'block' : 'none';
+        option.style.display = isMatch ? 'flex' : 'none';
     });
 });
 
@@ -70,6 +67,6 @@ dd3Input.addEventListener('input', function () {
     dd3Options.forEach(option => {
         const optionText = option.textContent.toLowerCase();
         const isMatch = optionText.includes(inputValue);
-        option.style.display = isMatch ? 'block' : 'none';
+        option.style.display = isMatch ? 'flex' : 'none';
     });
 });
