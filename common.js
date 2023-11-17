@@ -1,4 +1,4 @@
-// common.js
+// global sc0pe
 let results = [];
 let selectedFilters = [];
 let selectedItemClone;

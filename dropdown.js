@@ -1,4 +1,4 @@
-// Get references to the elements
+
 const dropdown1 = document.querySelector('.dropdown1');
 const dropdown2 = document.querySelector('.dropdown2');
 const dropdown3 = document.querySelector('.dropdown3');
@@ -9,7 +9,7 @@ const dropdownArrow1 = document.getElementById('dropdownArrow1');
 const dropdownArrow2 = document.getElementById('dropdownArrow2');
 const dropdownArrow3 = document.getElementById('dropdownArrow3');
 
-// Add an event listener to the visible part
+
 visiblePart1.addEventListener('click', function () {
     dropdownArrow1.classList.toggle('rotate180');
     dropdown1.classList.toggle('open');
@@ -33,7 +33,6 @@ dd1Input.addEventListener('input', function () {
     const inputValue = dd1Input.value.toLowerCase();
     const dd1ListContainer = document.getElementById('dd1-list');
     const dd1Options = dd1ListContainer.querySelectorAll('p');
-    const dd1Selected = dd1ListContainer.querySelectorAll('p.selected'); 
     dd1Options.forEach(option => {
         const optionText = option.textContent.toLowerCase();
         const isMatch = optionText.includes(inputValue);

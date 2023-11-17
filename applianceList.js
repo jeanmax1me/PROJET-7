@@ -1,4 +1,4 @@
-// Collect all appliances from all recipes
+
 const allAppliances = recipes.reduce((appliances, recipe) => {
   if (!appliances.includes(recipe.appliance.toLowerCase())) {
       appliances.push(recipe.appliance.toLowerCase());
@@ -6,7 +6,7 @@ const allAppliances = recipes.reduce((appliances, recipe) => {
   return appliances;
 }, []);
 
-// Get unique appliances based on the filtered recipes
+
 function getUniqueAppliances(results) {
   const uniqueAppliances = results.reduce((appliances, recipe) => {
     if (!appliances.includes(recipe.appliance.toLowerCase())) {
@@ -17,14 +17,12 @@ function getUniqueAppliances(results) {
   return uniqueAppliances;
 }
 
-// Get a reference to the container div
-const dd2ListContainer = document.querySelector('.dd2-list'); // Update the selector
-// Clear existing content
+
+const dd2ListContainer = document.querySelector('.dd2-list'); 
 dd2ListContainer.innerHTML = '';
 
-// Check if there are selected items or if results are empty
+
 if (selectedContainer.children.length === 0 && results.length === 0) {
-  // If no selected items and no results, display all appliances
   allAppliances.forEach(appliance => {
       const pElement = document.createElement('p');
       pElement.textContent = appliance;
@@ -34,9 +32,7 @@ if (selectedContainer.children.length === 0 && results.length === 0) {
       dd2ListContainer.appendChild(pElement);
   });
 } else {
-  // Get unique appliances based on the filtered recipes
   const uniqueAppliances = getUniqueAppliances(results);
-  // Iterate over the unique appliances array
   uniqueAppliances.forEach(appliance => {
       const pElement = document.createElement('p');
       pElement.textContent = appliance;
