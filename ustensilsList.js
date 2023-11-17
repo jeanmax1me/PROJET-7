@@ -1,4 +1,3 @@
-
 const allUstensils = recipes.reduce((ustensils, recipe) => {
     recipe.ustensils.forEach(ustensil => {
         const lowerCaseUstensil = ustensil.toLowerCase(); 
@@ -22,10 +21,8 @@ function getUniqueUstensils(results) {
     return uniqueUstensils;
 }
 
-
 const dd3ListContainer = document.querySelector('.dd3-list'); 
 dd3ListContainer.innerHTML = '';
-
 
 if (selectedContainer.children.length === 0 && results.length === 0) {
     allUstensils.forEach(ustensil => {

@@ -27,7 +27,7 @@ if (selectedContainer.children.length === 0 && results.length === 0) {
       const pElement = document.createElement('p');
       pElement.textContent = appliance;
       pElement.onclick = function () {
-          selectItem(this);
+        selectItem(this);
       };
       dd2ListContainer.appendChild(pElement);
   });
@@ -37,7 +37,7 @@ if (selectedContainer.children.length === 0 && results.length === 0) {
       const pElement = document.createElement('p');
       pElement.textContent = appliance;
       pElement.onclick = function () {
-          selectItem(this);
+        selectItem(this);
       };
       dd2ListContainer.appendChild(pElement);
   });

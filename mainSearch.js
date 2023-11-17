@@ -21,26 +21,49 @@ function handleSearch() {
     }
 }
 
+/*  SEARCH BY FILTERS > filter() METHOD
 function searchByFilters(selectedFilters) {
     results = recipes.filter(recipe => {
-        const ingredientMatch = selectedFilters.every(filter => {
-            return recipe.ingredients.some(ingredient => {
-                const lowerCaseIngredient = ingredient.ingredient.toLowerCase();
-                const lowerCaseFilter = filter.toLowerCase();
-                const includesFilter = lowerCaseIngredient.includes(lowerCaseFilter);
-                return includesFilter;
-            });
-        });
-        const applianceMatch = selectedFilters.some(filter =>
-            recipe.appliance.toLowerCase().includes(filter.toLowerCase())
-        );
-        const ustensilMatch = recipe.ustensils.some(ustensil =>
-            selectedFilters.some(filter =>
-                ustensil.toLowerCase().includes(filter.toLowerCase())
-            )
-        );
-        return ingredientMatch || applianceMatch || ustensilMatch;
+      // Check if all selected filters are present in the recipe's ingredients, appliance, or utensils
+      return selectedFilters.every(filter => {
+        if (recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(filter.toLowerCase()))) {
+          return true;
+        } else if (recipe.appliance.toLowerCase().includes(filter.toLowerCase())) {
+          return true;
+        } else if (recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(filter.toLowerCase()))) {
+          return true;
+        } else {
+          return false;
+        }
+      });
     });
+    updateSearchResults(results);
+    populateCards(results);
+  }
+*/
+
+// SEARCH BY FILTERS > for() METHOD
+function searchByFilters(selectedFilters) {
+    let results = [];
+    for (const recipe of recipes) {
+        let filterMatch = true;
+        for (const filter of selectedFilters) {
+            if (
+                !(
+                    recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(filter.toLowerCase())) ||
+                    recipe.appliance.toLowerCase().includes(filter.toLowerCase()) ||
+                    recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(filter.toLowerCase()))
+                )
+            ) {
+                filterMatch = false;
+                break;
+            }
+        }
+
+        if (filterMatch) {
+            results.push(recipe);
+        }
+    }
     updateSearchResults(results);
     populateCards(results);
 }
@@ -104,9 +127,9 @@ function updateDropdownOptions(dropdownNumber, options, property) {
         const optionElement = document.createElement('p');
 
         if (typeof option === 'string') {
-            optionElement.textContent = option.toLowerCase(); 
+            optionElement.textContent = option.toLowerCase();
         } else if (typeof option === 'object' && property in option) {
-            optionElement.textContent = option[property].toLowerCase(); 
+            optionElement.textContent = option[property].toLowerCase();
         } else {
             console.error(`Invalid option format: ${option}`);
             return;
