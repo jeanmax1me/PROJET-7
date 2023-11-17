@@ -6,23 +6,17 @@ searchInput.addEventListener('input', function () {
 
 function handleSearch() {
     const userInput = searchInput.value.toLowerCase();
-
-    // Check if the user has entered at least 3 characters
     if (userInput.length >= 3) {
         selectedFilters = [];
-        // Filter recipes based on title, ingredients, and description
         results = recipes.filter(recipe => {
             const titleMatch = recipe.name.toLowerCase().includes(userInput);
             const ingredientsMatch = recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(userInput));
             const descriptionMatch = recipe.description.toLowerCase().includes(userInput);
-            // Check for matches based on selected filters
             return titleMatch || ingredientsMatch || descriptionMatch;
         });
-        // Log the filtered results
         updateSearchResults(results);
         populateCards(results);
     } else {
-        // If less than 3 characters, clear previous results
         resetRecipes();
     }
 }
@@ -49,8 +43,6 @@ function searchByFilters(selectedFilters) {
     });
     updateSearchResults(results);
     populateCards(results);
-    updateSelectedVisuals();
-    console.log("Hello visuals");
 }
 
 
@@ -93,7 +85,6 @@ function findDropdownElementByText(text, containers) {
 }
 
 function resetRecipes() {
-    // Implement logic to clear previous search results from the UI
     populateCards(recipes);
     updateRecipeCount();
 }

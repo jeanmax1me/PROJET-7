@@ -1,24 +1,22 @@
 function selectItem(selectedElement) {
-    const filterValue = selectedElement.textContent.toLowerCase(); // Convert to lowercase
-    // Check if the filter is not present in selectedFilters (case-insensitive)
+    const filterValue = selectedElement.textContent.toLowerCase(); 
     if (!selectedFilters.some(filter => filter.toLowerCase() === filterValue)) {
-        // If the filter is not present, add it and update the search
         selectedFilters.push(filterValue);
-        console.log("pushed filter value:", filterValue)
         searchByFilters(selectedFilters);
     } else {
         const selectedItemClone = document.querySelector(`.selected-item[data-filter="${filterValue}"]`);
         if (selectedItemClone) {
             removeSelectedItem(selectedElement, selectedItemClone);
+            setTimeout(function () {    // timeout to wait for the DOM to update 
+               searchByFilters(selectedFilters);
+            }, 0);
         }
     }
     updateSelectedVisuals();
-    console.log("END OF SELECTITEM FUNCTION >selected filters :", selectedFilters);
 }
 
 function updateSelectedItemLayout(selectedElement) {
     const filterValue = selectedElement.textContent.trim().toLowerCase();
-    console.log('Filter Value:', filterValue);
     const svgDropdown = selectedElement.querySelector('svg');
 
     if (!selectedElement.classList.contains("selected")) {
@@ -66,6 +64,7 @@ function updateSelectedItemLayout(selectedElement) {
         svgElement.appendChild(pathElement);
         selectedElement.appendChild(svgElement);
     }
+    // clone svg
     function createCloneSVG() {
         if (!selectedItemClone) {
             console.error("selectedItemClone is undefined");
@@ -89,14 +88,14 @@ function updateSelectedItemLayout(selectedElement) {
 
 function removeSelectedItem(selectedElement, selectedItemClone) {
     const filterValue = selectedElement.textContent.trim().toLowerCase();
-    // Remove the filter value from the array
+
     const index = selectedFilters.indexOf(filterValue);
     if (index !== -1) {
         selectedFilters.splice(index, 1);
     }
     if (selectedFilters.length === 0) {
         searchInput.value = '';
-        resetPageState(); // reset dropdowns and cards to their original state
+        resetPageState(); 
     }
     selectedElement.classList.remove("selected");
     selectedElement.style.height = "";
@@ -129,9 +128,6 @@ function updateSelectedVisuals() {
         allSelectedItems.forEach(selectedItem => {
             const filterValue = selectedItem.getAttribute('data-filter');
             const selectedItemText = selectedItem.textContent.trim().toLowerCase();
-
-            console.log('Filter Value:', filterValue);
-            console.log('Selected Item Text:', selectedItemText);
 
             if (!selectedFilters.includes(filterValue) && !selectedFilters.includes(selectedItemText)) {
                 removeSelectedItem(selectedItem, null, null);
