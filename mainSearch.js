@@ -55,7 +55,7 @@ function updateSearchResults(results) {
     updateDropdownOptions(1, uniqueIngredients, 'ingredient');
     updateDropdownOptions(2, uniqueAppliances, 'appliance');
     updateDropdownOptions(3, uniqueUstensils, 'ustensil');
-    // Usage in updateSearchResults function
+
     const containers = [dd1ListContainer, dd2ListContainer, dd3ListContainer];
 
     selectedFilters.forEach(filter => {
@@ -104,9 +104,9 @@ function updateDropdownOptions(dropdownNumber, options, property) {
         const optionElement = document.createElement('p');
 
         if (typeof option === 'string') {
-            optionElement.textContent = option.toLowerCase(); // Convert to lowercase
+            optionElement.textContent = option.toLowerCase(); 
         } else if (typeof option === 'object' && property in option) {
-            optionElement.textContent = option[property].toLowerCase(); // Convert to lowercase
+            optionElement.textContent = option[property].toLowerCase(); 
         } else {
             console.error(`Invalid option format: ${option}`);
             return;

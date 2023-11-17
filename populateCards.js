@@ -6,15 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function populateCards(results) {
     const recipesContainer = document.getElementById('cards-container');
-    recipesContainer.innerHTML = ''; // Clear existing cards
+    recipesContainer.innerHTML = ''; 
     if (results.length === 0) {
-        // If no results, display a message
         const message = document.createElement('p');
         message.textContent = `Oups ! Aucune recette ne correspond à votre recherche "${searchInput.value}"`;
         recipesContainer.appendChild(message);
         updateRecipeCount();
     } else {
-        // If there are results, populate cards
         results.forEach((recipe, index) => {
             const card = createRecipeCard(recipe, index);
             recipesContainer.appendChild(card);
@@ -73,8 +71,6 @@ function updateRecipeCount() {
     const recipeCountElement = document.getElementById('number-recipes');
     const visibleRecipeCards = document.querySelectorAll('.recipe-container');
     const numberOfRecipes = visibleRecipeCards.length;
-
-    // Use a conditional statement to handle pluralization and zero case
     let recipeText;
 
     if (numberOfRecipes === 0) {
@@ -82,7 +78,5 @@ function updateRecipeCount() {
     } else {
         recipeText = numberOfRecipes === 1 ? 'recette' : 'recettes';
     }
-
-    // Display only the text without the number if numberOfRecipes is 0
     recipeCountElement.textContent = numberOfRecipes === 0 ? recipeText : `${numberOfRecipes} ${recipeText}`;
 }
