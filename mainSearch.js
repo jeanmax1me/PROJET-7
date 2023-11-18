@@ -4,6 +4,7 @@ searchInput.addEventListener('input', function () {
     handleSearch();
 });
 
+// array method main search 
 function handleSearch() {
     const userInput = searchInput.value.toLowerCase();
     if (userInput.length >= 3) {
@@ -21,10 +22,35 @@ function handleSearch() {
     }
 }
 
-/*  SEARCH BY FILTERS > filter() METHOD
+/* for loop main search 
+function handleSearch() {
+    const userInput = searchInput.value.toLowerCase();
+    if (userInput.length >= 3) {
+        selectedFilters = [];
+        results = [];
+
+        for (let i = 0; i < recipes.length; i++) {
+            const recipe = recipes[i];
+            const titleMatch = recipe.name.toLowerCase().includes(userInput);
+            const ingredientsMatch = recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(userInput));
+            const descriptionMatch = recipe.description.toLowerCase().includes(userInput);
+
+            if (titleMatch || ingredientsMatch || descriptionMatch) {
+                results.push(recipe);
+            }
+        }
+
+        updateSearchResults(results);
+        populateCards(results);
+    } else {
+        resetRecipes();
+    }
+}
+*/
+
+/*  array method filters search */
 function searchByFilters(selectedFilters) {
     results = recipes.filter(recipe => {
-      // Check if all selected filters are present in the recipe's ingredients, appliance, or utensils
       return selectedFilters.every(filter => {
         if (recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(filter.toLowerCase()))) {
           return true;
@@ -40,9 +66,9 @@ function searchByFilters(selectedFilters) {
     updateSearchResults(results);
     populateCards(results);
   }
-*/
 
-// SEARCH BY FILTERS > for() METHOD
+
+/* filters search for loop 
 function searchByFilters(selectedFilters) {
     let results = [];
     for (const recipe of recipes) {
@@ -67,7 +93,7 @@ function searchByFilters(selectedFilters) {
     updateSearchResults(results);
     populateCards(results);
 }
-
+*/
 
 
 function updateSearchResults(results) {

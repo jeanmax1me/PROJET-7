@@ -1,4 +1,3 @@
-// populateCards.js
 document.addEventListener('DOMContentLoaded', function () {
     populateCards(recipes);
     updateRecipeCount();
@@ -53,7 +52,6 @@ function populateCards(results) {
             </div>
         </article>
     `;
-
     return card;
 }
 */
@@ -105,7 +103,6 @@ function createRecipeCard(recipe, index) {
         recipeIngredients.appendChild(ingredientDiv);
     });
 
-    // Append all elements to their respective parents
     descriptionContainer.appendChild(recipeDescription);
     containerCardText.appendChild(recipeName);
     containerCardText.appendChild(recetteHeading);
