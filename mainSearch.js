@@ -4,6 +4,7 @@ searchInput.addEventListener('input', function () {
     handleSearch();
 });
 
+/* main search array method
 function handleSearch() {
     const userInput = searchInput.value.toLowerCase();
     if (userInput.length >= 3) {
@@ -20,8 +21,36 @@ function handleSearch() {
         resetRecipes();
     }
 }
+*/
 
-/*  SEARCH BY FILTERS > filter() METHOD
+/* for loop main search*/
+function handleSearch() {
+    const userInput = searchInput.value.toLowerCase();
+    if (userInput.length >= 3) {
+        selectedFilters = [];
+        results = [];
+
+        for (let i = 0; i < recipes.length; i++) {
+            const recipe = recipes[i];
+            const titleMatch = recipe.name.toLowerCase().includes(userInput);
+            const ingredientsMatch = recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(userInput));
+            const descriptionMatch = recipe.description.toLowerCase().includes(userInput);
+
+            if (titleMatch || ingredientsMatch || descriptionMatch) {
+                results.push(recipe);
+            }
+        }
+
+        updateSearchResults(results);
+        populateCards(results);
+    } else {
+        resetRecipes();
+    }
+}
+
+
+
+/*  array method
 function searchByFilters(selectedFilters) {
     results = recipes.filter(recipe => {
       // Check if all selected filters are present in the recipe's ingredients, appliance, or utensils
@@ -42,7 +71,7 @@ function searchByFilters(selectedFilters) {
   }
 */
 
-// SEARCH BY FILTERS > for() METHOD
+// FOR loop
 function searchByFilters(selectedFilters) {
     let results = [];
     for (const recipe of recipes) {
